@@ -1,25 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_width="@dimen/item_width"
+    android:layout_height="@dimen/item_height">
 
-    <LinearLayout
+    <View
         android:layout_width="@dimen/hole_width"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/hole_height"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:orientation="vertical">
+        android:layout_marginBottom="@dimen/item_margin_bottom"
+        android:background="@drawable/hole_back"/>
 
-        <View
-            android:layout_width="@dimen/hole_width"
-            android:layout_height="@dimen/hole_height"
-            android:background="@drawable/hole_back"/>
+    <ImageView
+        android:layout_width="@dimen/item_width"
+        android:layout_height="@dimen/dev_height"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="@dimen/gap_small"
+        android:layout_marginRight="@dimen/gap_small"
+        android:adjustViewBounds="true"
+        android:src="@drawable/dev_toni"/>
 
-        <View
-            android:layout_width="@dimen/hole_width"
-            android:layout_height="@dimen/item_margin_bottom"
-            android:background="@android:color/white"/>
+    <View
+        android:layout_width="@dimen/hole_width"
+        android:layout_height="@dimen/hole_height"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/item_margin_bottom"
+        android:background="@drawable/hole_front"/>
 
-    </LinearLayout>
+    <View
+        android:layout_width="@dimen/hole_width"
+        android:layout_height="@dimen/item_margin_bottom"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@android:color/white"/>
 </RelativeLayout>
