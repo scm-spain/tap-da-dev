@@ -11,17 +11,18 @@ public class MainPresenter {
 
     public static final int GAME_ITERATION_DELAY = 50;
     private final MainActivity activity;
+    private final View developer0;
     private final View developer1;
     private final View developer2;
-    private final View developer3;
 
     private boolean gameStarted = false;
+    private int lastTappedDeveloper = 0;
 
-    public MainPresenter(MainActivity activity, View developer1, View developer2, View developer3) {
+    public MainPresenter(MainActivity activity, View developer0, View developer1, View developer2) {
         this.activity = activity;
+        this.developer0 = developer0;
         this.developer1 = developer1;
         this.developer2 = developer2;
-        this.developer3 = developer3;
     }
 
     public void onDeveloperTapped(View view) {
@@ -35,9 +36,9 @@ public class MainPresenter {
     }
 
     private void hideThreeDevelopers() {
-        hide(developer1, 180);
-        hide(developer2);
-        hide(developer3, 400);
+        hide(developer0, 180);
+        hide(developer1);
+        hide(developer2, 400);
     }
 
     private void hide(View view) {
@@ -48,12 +49,12 @@ public class MainPresenter {
     }
 
     private void show(int developer) {
-        if (developer == 1) {
+        if (developer == 0) {
+            show(developer0);
+        } else if (developer == 1) {
             show(developer1);
         } else if (developer == 2) {
             show(developer2);
-        } else if (developer == 3) {
-            show(developer3);
         }
     }
 
@@ -92,11 +93,11 @@ public class MainPresenter {
 
     private void showOneRandomDeveloper() {
         Random random = new Random();
-        show(random.nextInt(4));
+        show(random.nextInt(3));
     }
 
     private boolean allDevelopersAreHidden() {
-        return isInvisible(developer1) && isInvisible(developer2) && isInvisible(developer3);
+        return isInvisible(developer0) && isInvisible(developer1) && isInvisible(developer2);
     }
 
     private boolean isInvisible(View view) {
