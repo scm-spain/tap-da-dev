@@ -18,18 +18,21 @@
         android:orientation="horizontal">
 
         <include
+            android:id="@+id/l_developer1"
             layout="@layout/item_dev"
             android:layout_width="@dimen/item_width"
             android:layout_height="@dimen/item_height"
             android:layout_weight="1"/>
 
         <include
+            android:id="@+id/l_developer2"
             layout="@layout/item_dev"
             android:layout_width="@dimen/item_width"
             android:layout_height="@dimen/item_height"
             android:layout_weight="1"/>
 
         <include
+            android:id="@+id/l_developer3"
             layout="@layout/item_dev"
             android:layout_width="@dimen/item_width"
             android:layout_height="@dimen/item_height"
