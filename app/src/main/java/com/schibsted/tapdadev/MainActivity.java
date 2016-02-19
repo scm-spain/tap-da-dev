@@ -17,8 +17,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        presenter = new MainPresenter(this);
-
         developer1 = findViewById(R.id.l_developer1).findViewById(R.id.iv_developer);
         developer2 = findViewById(R.id.l_developer2).findViewById(R.id.iv_developer);
         developer3 = findViewById(R.id.l_developer3).findViewById(R.id.iv_developer);
@@ -27,13 +25,15 @@ public class MainActivity extends AppCompatActivity {
         developer1.setOnClickListener(listener);
         developer2.setOnClickListener(listener);
         developer3.setOnClickListener(listener);
+
+        presenter = new MainPresenter(this, developer1, developer2, developer3);
     }
 
     public class OnDeveloperClickListener implements View.OnClickListener {
 
         @Override
         public void onClick(View view) {
-            presenter.hide(view);
+            presenter.onDeveloperTapped(view);
         }
     }
 }
