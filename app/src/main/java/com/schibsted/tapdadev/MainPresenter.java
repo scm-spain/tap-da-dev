@@ -25,14 +25,16 @@ public class MainPresenter {
     public void onDeveloperTapped(View view) {
         if (!gameStarted) {
             gameStarted = true;
-
-            Random random = new Random();
-            hide(developer1, random.nextInt(1000));
-            hide(developer2);
-            hide(developer3, random.nextInt(1000));
+            hideThreeDevelopers();
         } else {
             hide(view);
         }
+    }
+
+    private void hideThreeDevelopers() {
+        hide(developer1, 180);
+        hide(developer2);
+        hide(developer3, 400);
     }
 
     private void hide(View view) {
