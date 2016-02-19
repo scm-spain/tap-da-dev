@@ -6,20 +6,16 @@ import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
-    View developer0;
-    View developer1;
-    View developer2;
-
-    MainPresenter presenter;
+    private MainPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        developer0 = findViewById(R.id.l_developer0).findViewById(R.id.iv_developer);
-        developer1 = findViewById(R.id.l_developer1).findViewById(R.id.iv_developer);
-        developer2 = findViewById(R.id.l_developer2).findViewById(R.id.iv_developer);
+        View developer0 = findViewById(R.id.l_developer0).findViewById(R.id.iv_developer);
+        View developer1 = findViewById(R.id.l_developer1).findViewById(R.id.iv_developer);
+        View developer2 = findViewById(R.id.l_developer2).findViewById(R.id.iv_developer);
 
         View.OnClickListener listener = new OnDeveloperClickListener();
         developer0.setOnClickListener(listener);
