@@ -10,13 +10,14 @@ import java.util.Random;
 public class MainPresenter {
 
     public static final int GAME_ITERATION_DELAY = 50;
+    public static final int DEVS_COUNT = 3;
     private final MainActivity activity;
     private final View developer0;
     private final View developer1;
     private final View developer2;
 
     private boolean gameStarted = false;
-    private int lastTappedDeveloper = 0;
+    private int lastShownDeveloper = 2;
 
     public MainPresenter(MainActivity activity, View developer0, View developer1, View developer2) {
         this.activity = activity;
@@ -56,6 +57,7 @@ public class MainPresenter {
         } else if (developer == 2) {
             show(developer2);
         }
+        lastShownDeveloper = developer;
     }
 
     private void show(View view) {
@@ -92,8 +94,16 @@ public class MainPresenter {
     }
 
     private void showOneRandomDeveloper() {
+        show(getNextDeveloperToShow());
+    }
+
+    private int getNextDeveloperToShow() {
         Random random = new Random();
-        show(random.nextInt(3));
+        int nextDeveloper = random.nextInt(DEVS_COUNT);
+        while (nextDeveloper == lastShownDeveloper) {
+            nextDeveloper = random.nextInt(DEVS_COUNT);
+        }
+        return nextDeveloper;
     }
 
     private boolean allDevelopersAreHidden() {
