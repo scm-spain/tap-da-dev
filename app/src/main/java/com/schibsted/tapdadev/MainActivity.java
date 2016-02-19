@@ -29,6 +29,12 @@ public class MainActivity extends AppCompatActivity {
         presenter = new MainPresenter(this, developer1, developer2, developer3);
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        presenter.onPause();
+    }
+
     public class OnDeveloperClickListener implements View.OnClickListener {
 
         @Override

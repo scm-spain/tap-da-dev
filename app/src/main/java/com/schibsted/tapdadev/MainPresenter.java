@@ -1,13 +1,13 @@
 package com.schibsted.tapdadev;
 
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 
-import java.util.Random;
-
 public class MainPresenter {
 
+    public static final int GAME_ITERATION_DELAY = 50;
     private final MainActivity activity;
     private final View developer1;
     private final View developer2;
@@ -26,6 +26,7 @@ public class MainPresenter {
         if (!gameStarted) {
             gameStarted = true;
             hideThreeDevelopers();
+            setNextGameIteration();
         } else {
             hide(view);
         }
@@ -49,5 +50,21 @@ public class MainPresenter {
                 hide(view);
             }
         }, delay);
+    }
+
+    private void setNextGameIteration() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (gameStarted) {
+                    Log.d("GAME", "The game is on!");
+                    setNextGameIteration();
+                }
+            }
+        }, GAME_ITERATION_DELAY);
+    }
+
+    public void onPause() {
+        gameStarted = false;
     }
 }
