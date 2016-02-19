@@ -41,8 +41,10 @@ public class MainPresenter {
     }
 
     private void hide(View view) {
-        view.startAnimation(AnimationUtils.loadAnimation(activity, R.anim.slide_down));
-        view.setVisibility(View.INVISIBLE);
+        if (view.getVisibility() == View.VISIBLE) {
+            view.startAnimation(AnimationUtils.loadAnimation(activity, R.anim.slide_down));
+            view.setVisibility(View.INVISIBLE);
+        }
     }
 
     private void show(int developer) {
