@@ -2,7 +2,8 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="@dimen/item_width"
-    android:layout_height="@dimen/item_height">
+    android:layout_height="@dimen/item_height"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <View
         android:layout_width="@dimen/hole_width"
@@ -20,7 +21,7 @@
         android:layout_marginLeft="@dimen/gap_small"
         android:layout_marginRight="@dimen/gap_small"
         android:adjustViewBounds="true"
-        android:src="@drawable/dev_toni"/>
+        tools:src="@drawable/dev_toni"/>
 
     <View
         android:layout_width="@dimen/hole_width"

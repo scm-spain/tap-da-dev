@@ -4,6 +4,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 
 import java.util.Random;
 
@@ -19,11 +20,15 @@ public class MainPresenter {
     private boolean gameStarted = false;
     private int lastShownDeveloper = 2;
 
-    public MainPresenter(MainActivity activity, View developer0, View developer1, View developer2) {
+    public MainPresenter(MainActivity activity, ImageView developer0, ImageView developer1, ImageView developer2) {
         this.activity = activity;
         this.developer0 = developer0;
         this.developer1 = developer1;
         this.developer2 = developer2;
+
+        developer0.setImageResource(R.drawable.dev_toni);
+        developer1.setImageResource(R.drawable.dev_roc);
+        developer2.setImageResource(R.drawable.dev_oscar);
     }
 
     public void onDeveloperTapped(View view) {
