@@ -92,7 +92,7 @@ public class MainPresenter {
 
     private void showOneRandomDeveloper() {
         Random random = new Random();
-        show(random.nextInt(3));
+        show(random.nextInt(4));
     }
 
     private boolean allDevelopersAreHidden() {
