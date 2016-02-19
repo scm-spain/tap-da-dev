@@ -1,5 +1,25 @@
 <resources>
-    <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!-- http://developer.android.com/design/style/metrics-grids.html -->
+    <dimen name="gap_small">4dp</dimen>
+    <dimen name="gap_medium">8dp</dimen>
+    <dimen name="gap_large">16dp</dimen>
+    <dimen name="gap_xlarge">32dp</dimen>
+    <dimen name="gap_xxlarge">64dp</dimen>
+
+
+    <!-- http://developer.android.com/design/style/typography.html -->
+    <dimen name="text_size_micro">12sp</dimen>
+    <dimen name="text_size_small">14sp</dimen>
+    <dimen name="text_size_medium">18sp</dimen>
+    <dimen name="text_size_large">22sp</dimen>
+
+    <!-- Tap da dev -->
+    <dimen name="item_width">100dp</dimen>
+    <dimen name="item_height">400dp</dimen>
+    <dimen name="item_margin_bottom">40dp</dimen>
+
+    <dimen name="hole_width">100dp</dimen>
+    <dimen name="hole_height">30dp</dimen>
+
 </resources>
