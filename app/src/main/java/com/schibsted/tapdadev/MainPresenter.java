@@ -12,6 +12,10 @@ public class MainPresenter {
 
     public static final int GAME_ITERATION_DELAY = 50;
     public static final int DEVS_COUNT = 3;
+
+    private static final int MIN_RANDOM_DELAY = 500;
+    private static final int MAX_RANDOM_DELAY = 1500;
+
     private final MainActivity activity;
     private final View developer0;
     private final View developer1;
@@ -68,6 +72,11 @@ public class MainPresenter {
     private void show(View view) {
         view.startAnimation(AnimationUtils.loadAnimation(activity, R.anim.slide_up));
         view.setVisibility(View.VISIBLE);
+        hide(view, getRandomDelay());
+    }
+
+    private int getRandomDelay() {
+        return Integer.valueOf((int) Math.floor(Math.random() * (MAX_RANDOM_DELAY - MIN_RANDOM_DELAY + 1) + MIN_RANDOM_DELAY));
     }
 
     private void hide(final View view, int delay) {
