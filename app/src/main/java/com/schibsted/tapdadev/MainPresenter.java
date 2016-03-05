@@ -58,13 +58,16 @@ public class MainPresenter {
         }
     }
 
-    private void show(int developer) {
+    private void rollDeveloper(int developer) {
         if (developer == 0) {
             show(developer0);
+            hide(developer0, getRandomDelay());
         } else if (developer == 1) {
             show(developer1);
+            hide(developer1, getRandomDelay());
         } else if (developer == 2) {
             show(developer2);
+            hide(developer2, getRandomDelay());
         }
         lastShownDeveloper = developer;
     }
@@ -72,11 +75,14 @@ public class MainPresenter {
     private void show(View view) {
         view.startAnimation(AnimationUtils.loadAnimation(activity, R.anim.slide_up));
         view.setVisibility(View.VISIBLE);
-        hide(view, getRandomDelay());
     }
 
     private int getRandomDelay() {
-        return Integer.valueOf((int) Math.floor(Math.random() * (MAX_RANDOM_DELAY - MIN_RANDOM_DELAY + 1) + MIN_RANDOM_DELAY));
+        return getRandomValue(MIN_RANDOM_DELAY, MAX_RANDOM_DELAY);
+    }
+
+    private int getRandomValue(int maxValue, int minValue) {
+        return Integer.valueOf((int) Math.floor(Math.random() * (maxValue - minValue + 1) + minValue));
     }
 
     private void hide(final View view, int delay) {
@@ -102,13 +108,13 @@ public class MainPresenter {
     private void runGameIteration() {
         Log.d("GAME", "The game is on!");
         if (allDevelopersAreHidden()) {
-            showOneRandomDeveloper();
+            rollOneRandomDeveloper();
         }
         setNextGameIteration();
     }
 
-    private void showOneRandomDeveloper() {
-        show(getNextDeveloperToShow());
+    private void rollOneRandomDeveloper() {
+        rollDeveloper(getNextDeveloperToShow());
     }
 
     private int getNextDeveloperToShow() {
