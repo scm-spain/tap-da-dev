@@ -10,6 +10,7 @@ import android.widget.ImageView;
 public class MainActivity extends AppCompatActivity {
 
     private MainPresenter presenter;
+    private Handler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +26,9 @@ public class MainActivity extends AppCompatActivity {
         developer1.setOnClickListener(listener);
         developer2.setOnClickListener(listener);
 
-        presenter = new MainPresenter(this,
+        handler = new Handler();
+
+        presenter = new MainPresenter(this, handler,
           new ImageView[]{developer0, developer1, developer2},
           CharacterFactory.withImages(R.drawable.dev_toni, R.drawable.dev_roc, R.drawable.dev_oscar)
         );
@@ -44,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void hideDelayed(final View view, int delay) {
-        new Handler().postDelayed(new Runnable() {
+        handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 hide(view);

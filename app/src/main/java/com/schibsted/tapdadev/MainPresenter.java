@@ -16,17 +16,18 @@ public class MainPresenter {
     private static final int MAX_RANDOM_DELAY = 1500;
 
     private final MainActivity activity;
+    private final Handler handler;
     private final Character[] characters;
     private final ImageView[] holes;
 
     private boolean gameStarted = false;
     private int lastShownDeveloper = 2;
 
-    public MainPresenter(MainActivity activity, ImageView[] holes, Character[] developers) {
+    public MainPresenter(MainActivity activity, Handler handler, ImageView[] holes, Character[] developers) {
         this.activity = activity;
+        this.handler = handler;
         this.holes = holes;
         this.characters = developers;
-
         showAll();
     }
 
@@ -75,7 +76,7 @@ public class MainPresenter {
     }
 
     private void setNextGameIteration() {
-        new Handler().postDelayed(new Runnable() {
+        handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 if (gameStarted) {
