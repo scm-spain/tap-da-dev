@@ -17,27 +17,23 @@ public class MainPresenter {
 
     private final MainActivity activity;
     private final int[] developerImages;
-    private final ImageView hole0;
-    private final ImageView hole1;
-    private final ImageView hole2;
+    private final ImageView[] holes;
 
     private boolean gameStarted = false;
     private int lastShownDeveloper = 2;
 
     public MainPresenter(MainActivity activity, ImageView[] holes, int[] developerImages) {
         this.activity = activity;
+        this.holes = holes;
         this.developerImages = developerImages;
-        this.hole0 = holes[0];
-        this.hole1 = holes[1];
-        this.hole2 = holes[2];
 
         showAll();
     }
 
     private void showAll() {
-        activity.show(hole0, developerImages[0]);
-        activity.show(hole1, developerImages[1]);
-        activity.show(hole2, developerImages[2]);
+        activity.show(holes[0], developerImages[0]);
+        activity.show(holes[1], developerImages[1]);
+        activity.show(holes[2], developerImages[2]);
     }
 
     public void onDeveloperTapped(View view) {
@@ -51,21 +47,21 @@ public class MainPresenter {
     }
 
     private void hideThreeDevelopers() {
-        activity.hideDelayed(hole0, 180);
-        activity.hide(hole1);
-        activity.hideDelayed(hole2, 400);
+        activity.hideDelayed(holes[0], 180);
+        activity.hide(holes[1]);
+        activity.hideDelayed(holes[2], 400);
     }
 
     private void rollDeveloper(int developer) {
         if (developer == 0) {
-            activity.show(hole0, developerImages[0]);
-            activity.hideDelayed(hole0, getRandomDelay());
+            activity.show(holes[0], developerImages[0]);
+            activity.hideDelayed(holes[0], getRandomDelay());
         } else if (developer == 1) {
-            activity.show(hole1, developerImages[1]);
-            activity.hideDelayed(hole1, getRandomDelay());
+            activity.show(holes[1], developerImages[1]);
+            activity.hideDelayed(holes[1], getRandomDelay());
         } else if (developer == 2) {
-            activity.show(hole2, developerImages[2]);
-            activity.hideDelayed(hole2, getRandomDelay());
+            activity.show(holes[2], developerImages[2]);
+            activity.hideDelayed(holes[2], getRandomDelay());
         }
         lastShownDeveloper = developer;
     }
@@ -111,7 +107,7 @@ public class MainPresenter {
     }
 
     private boolean allDevelopersAreHidden() {
-        return isInvisible(hole0) && isInvisible(hole1) && isInvisible(hole2);
+        return isInvisible(holes[0]) && isInvisible(holes[1]) && isInvisible(holes[2]);
     }
 
     private boolean isInvisible(View view) {
