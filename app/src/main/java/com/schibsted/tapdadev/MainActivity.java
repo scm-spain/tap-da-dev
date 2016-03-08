@@ -25,7 +25,10 @@ public class MainActivity extends AppCompatActivity {
         developer1.setOnClickListener(listener);
         developer2.setOnClickListener(listener);
 
-        presenter = new MainPresenter(this, developer0, developer1, developer2);
+        presenter = new MainPresenter(this,
+          new ImageView[]{developer0, developer1, developer2},
+          new int[]{R.drawable.dev_toni, R.drawable.dev_roc, R.drawable.dev_oscar}
+        );
     }
 
     @Override

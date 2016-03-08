@@ -16,22 +16,22 @@ public class MainPresenter {
     private static final int MAX_RANDOM_DELAY = 1500;
 
     private final MainActivity activity;
-    private final View developer0;
-    private final View developer1;
-    private final View developer2;
+    private final ImageView developer0;
+    private final ImageView developer1;
+    private final ImageView developer2;
 
     private boolean gameStarted = false;
     private int lastShownDeveloper = 2;
 
-    public MainPresenter(MainActivity activity, ImageView developer0, ImageView developer1, ImageView developer2) {
+    public MainPresenter(MainActivity activity, ImageView[] holes, int[] developerImages) {
         this.activity = activity;
-        this.developer0 = developer0;
-        this.developer1 = developer1;
-        this.developer2 = developer2;
+        this.developer0 = holes[0];
+        this.developer1 = holes[1];
+        this.developer2 = holes[2];
 
-        developer0.setImageResource(R.drawable.dev_toni);
-        developer1.setImageResource(R.drawable.dev_roc);
-        developer2.setImageResource(R.drawable.dev_oscar);
+        developer0.setImageResource(developerImages[0]);
+        developer1.setImageResource(developerImages[1]);
+        developer2.setImageResource(developerImages[2]);
     }
 
     public void onDeveloperTapped(View view) {
