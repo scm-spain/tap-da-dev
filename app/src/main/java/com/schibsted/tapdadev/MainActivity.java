@@ -2,8 +2,13 @@ package com.schibsted.tapdadev;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -14,16 +19,36 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ImageView developer0 = (ImageView) findViewById(R.id.l_developer0).findViewById(R.id.iv_developer);
-        ImageView developer1 = (ImageView) findViewById(R.id.l_developer1).findViewById(R.id.iv_developer);
-        ImageView developer2 = (ImageView) findViewById(R.id.l_developer2).findViewById(R.id.iv_developer);
+        try {
+            presenter = new MainPresenter(this, getDeveloperLayouts(), getDeveloperResources());
+        } catch (Exception e) {
+            Log.e("GAME", e.getMessage());
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG);
+        }
+    }
 
-        View.OnClickListener listener = new OnDeveloperClickListener();
-        developer0.setOnClickListener(listener);
-        developer1.setOnClickListener(listener);
-        developer2.setOnClickListener(listener);
+    private List<Integer> getDeveloperResources() {
+        List<Integer> list = new ArrayList<>();
+        list.add(R.drawable.dev_oscar);
+        list.add(R.drawable.dev_roc);
+        list.add(R.drawable.dev_toni);
 
-        presenter = new MainPresenter(this, developer0, developer1, developer2);
+        return list;
+    }
+
+    private List<ImageView> getDeveloperLayouts() {
+        List<ImageView> list = new ArrayList<>();
+        list.add(createDeveloper(R.id.l_developer0));
+        list.add(createDeveloper(R.id.l_developer1));
+        list.add(createDeveloper(R.id.l_developer2));
+
+        return list;
+    }
+
+    private ImageView createDeveloper(int developerLayout) {
+        ImageView developer = (ImageView) findViewById(developerLayout).findViewById(R.id.iv_developer);
+        developer.setOnClickListener(new OnDeveloperClickListener());
+        return developer;
     }
 
     @Override
@@ -33,10 +58,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public class OnDeveloperClickListener implements View.OnClickListener {
-
         @Override
         public void onClick(View view) {
-            presenter.onDeveloperTapped(view);
+            if (view instanceof ImageView) {
+                presenter.onDeveloperTapped((ImageView)view);
+            }
         }
     }
 }
