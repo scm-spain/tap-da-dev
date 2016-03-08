@@ -3,7 +3,6 @@ package com.schibsted.tapdadev;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import java.util.Random;
@@ -41,40 +40,28 @@ public class MainPresenter {
             hideThreeDevelopers();
             setNextGameIteration();
         } else {
-            hide(view);
+            activity.hide(view);
         }
     }
 
     private void hideThreeDevelopers() {
-        hide(developer0, 180);
-        hide(developer1);
-        hide(developer2, 400);
-    }
-
-    private void hide(View view) {
-        if (view.getVisibility() == View.VISIBLE) {
-            view.startAnimation(AnimationUtils.loadAnimation(activity, R.anim.slide_down));
-            view.setVisibility(View.INVISIBLE);
-        }
+        activity.hideDelayed(developer0, 180);
+        activity.hide(developer1);
+        activity.hideDelayed(developer2, 400);
     }
 
     private void rollDeveloper(int developer) {
         if (developer == 0) {
-            show(developer0);
-            hide(developer0, getRandomDelay());
+            activity.show(developer0);
+            activity.hideDelayed(developer0, getRandomDelay());
         } else if (developer == 1) {
-            show(developer1);
-            hide(developer1, getRandomDelay());
+            activity.show(developer1);
+            activity.hideDelayed(developer1, getRandomDelay());
         } else if (developer == 2) {
-            show(developer2);
-            hide(developer2, getRandomDelay());
+            activity.show(developer2);
+            activity.hideDelayed(developer2, getRandomDelay());
         }
         lastShownDeveloper = developer;
-    }
-
-    private void show(View view) {
-        view.startAnimation(AnimationUtils.loadAnimation(activity, R.anim.slide_up));
-        view.setVisibility(View.VISIBLE);
     }
 
     private int getRandomDelay() {
@@ -83,15 +70,6 @@ public class MainPresenter {
 
     private int getRandomValue(int maxValue, int minValue) {
         return Integer.valueOf((int) Math.floor(Math.random() * (maxValue - minValue + 1) + minValue));
-    }
-
-    private void hide(final View view, int delay) {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                hide(view);
-            }
-        }, delay);
     }
 
     private void setNextGameIteration() {

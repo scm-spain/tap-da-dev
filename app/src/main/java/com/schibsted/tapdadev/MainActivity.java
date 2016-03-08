@@ -1,8 +1,10 @@
 package com.schibsted.tapdadev;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
@@ -30,6 +32,27 @@ public class MainActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         presenter.onPause();
+    }
+
+    void show(View view) {
+        view.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_up));
+        view.setVisibility(View.VISIBLE);
+    }
+
+    void hideDelayed(final View view, int delay) {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                hide(view);
+            }
+        }, delay);
+    }
+
+    void hide(View view) {
+        if (view.getVisibility() == View.VISIBLE) {
+            view.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_down));
+            view.setVisibility(View.INVISIBLE);
+        }
     }
 
     public class OnDeveloperClickListener implements View.OnClickListener {
