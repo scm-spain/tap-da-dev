@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
         presenter = new MainPresenter(this,
           new ImageView[]{developer0, developer1, developer2},
-          new int[]{R.drawable.dev_toni, R.drawable.dev_roc, R.drawable.dev_oscar}
+          CharacterFactory.withImages(R.drawable.dev_toni, R.drawable.dev_roc, R.drawable.dev_oscar)
         );
     }
 
@@ -37,8 +37,8 @@ public class MainActivity extends AppCompatActivity {
         presenter.onPause();
     }
 
-    void show(ImageView view, int developerImage) {
-        view.setImageResource(developerImage);
+    void show(ImageView view, Character character) {
+        view.setImageResource(character.getImageResource());
         view.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_up));
         view.setVisibility(View.VISIBLE);
     }

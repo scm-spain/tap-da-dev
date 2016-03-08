@@ -16,24 +16,24 @@ public class MainPresenter {
     private static final int MAX_RANDOM_DELAY = 1500;
 
     private final MainActivity activity;
-    private final int[] developerImages;
+    private final Character[] characters;
     private final ImageView[] holes;
 
     private boolean gameStarted = false;
     private int lastShownDeveloper = 2;
 
-    public MainPresenter(MainActivity activity, ImageView[] holes, int[] developerImages) {
+    public MainPresenter(MainActivity activity, ImageView[] holes, Character[] developers) {
         this.activity = activity;
         this.holes = holes;
-        this.developerImages = developerImages;
+        this.characters = developers;
 
         showAll();
     }
 
     private void showAll() {
-        activity.show(holes[0], developerImages[0]);
-        activity.show(holes[1], developerImages[1]);
-        activity.show(holes[2], developerImages[2]);
+        activity.show(holes[0], characters[0]);
+        activity.show(holes[1], characters[1]);
+        activity.show(holes[2], characters[2]);
     }
 
     public void onDeveloperTapped(View view) {
@@ -54,13 +54,13 @@ public class MainPresenter {
 
     private void rollDeveloper(int developer) {
         if (developer == 0) {
-            activity.show(holes[0], developerImages[0]);
+            activity.show(holes[0], characters[0]);
             activity.hideDelayed(holes[0], getRandomDelay());
         } else if (developer == 1) {
-            activity.show(holes[1], developerImages[1]);
+            activity.show(holes[1], characters[1]);
             activity.hideDelayed(holes[1], getRandomDelay());
         } else if (developer == 2) {
-            activity.show(holes[2], developerImages[2]);
+            activity.show(holes[2], characters[2]);
             activity.hideDelayed(holes[2], getRandomDelay());
         }
         lastShownDeveloper = developer;
