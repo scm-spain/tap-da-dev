@@ -37,7 +37,8 @@ public class MainActivity extends AppCompatActivity {
         presenter.onPause();
     }
 
-    void show(View view) {
+    void show(ImageView view, int developerImage) {
+        view.setImageResource(developerImage);
         view.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_up));
         view.setVisibility(View.VISIBLE);
     }
