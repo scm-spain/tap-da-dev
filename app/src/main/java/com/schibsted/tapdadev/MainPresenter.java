@@ -6,92 +6,56 @@ import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
-import java.util.Random;
+import java.util.Collections;
+import java.util.List;
 
 public class MainPresenter {
 
     public static final int GAME_ITERATION_DELAY = 50;
-    public static final int DEVS_COUNT = 3;
 
     private static final int MIN_RANDOM_DELAY = 500;
     private static final int MAX_RANDOM_DELAY = 1500;
 
     private final MainActivity activity;
-    private final View developer0;
-    private final View developer1;
-    private final View developer2;
 
+    private final List<ImageView> developerLayouts;
+    private final List<Integer> developerResources;
+
+    private int lastDeveloperResource = 0;
     private boolean gameStarted = false;
-    private int lastShownDeveloper = 2;
 
-    public MainPresenter(MainActivity activity, ImageView developer0, ImageView developer1, ImageView developer2) {
+    public MainPresenter(MainActivity activity, List<ImageView> developerLayouts, List<Integer> developerResources) throws Exception {
+        if (developerLayouts == null || developerLayouts.size() < 3) {
+            throw new Exception("The layouts array must have at least 3 developers");
+        }
+
+        if (developerResources == null || developerResources.size() < 2) {
+            throw new Exception("The resources array must have at least 3 developers");
+        }
+
         this.activity = activity;
-        this.developer0 = developer0;
-        this.developer1 = developer1;
-        this.developer2 = developer2;
+        this.developerLayouts = developerLayouts;
+        this.developerResources = developerResources;
 
-        developer0.setImageResource(R.drawable.dev_toni);
-        developer1.setImageResource(R.drawable.dev_roc);
-        developer2.setImageResource(R.drawable.dev_oscar);
+        for (int i=0; i< developerLayouts.size() && i< developerResources.size(); i++) {
+            developerLayouts.get(i).setImageResource(developerResources.get(i));
+        }
     }
 
-    public void onDeveloperTapped(View view) {
+    // region manager game
+    public void onDeveloperTapped(ImageView developerLayout) {
         if (!gameStarted) {
             gameStarted = true;
-            hideThreeDevelopers();
+            hideAllDeveloperLayouts();
             setNextGameIteration();
         } else {
-            hide(view);
+            hideDeveloperLayout(developerLayout);
         }
     }
 
-    private void hideThreeDevelopers() {
-        hide(developer0, 180);
-        hide(developer1);
-        hide(developer2, 400);
-    }
-
-    private void hide(View view) {
-        if (view.getVisibility() == View.VISIBLE) {
-            view.startAnimation(AnimationUtils.loadAnimation(activity, R.anim.slide_down));
-            view.setVisibility(View.INVISIBLE);
-        }
-    }
-
-    private void rollDeveloper(int developer) {
-        if (developer == 0) {
-            show(developer0);
-            hide(developer0, getRandomDelay());
-        } else if (developer == 1) {
-            show(developer1);
-            hide(developer1, getRandomDelay());
-        } else if (developer == 2) {
-            show(developer2);
-            hide(developer2, getRandomDelay());
-        }
-        lastShownDeveloper = developer;
-    }
-
-    private void show(View view) {
-        view.startAnimation(AnimationUtils.loadAnimation(activity, R.anim.slide_up));
-        view.setVisibility(View.VISIBLE);
-    }
-
-    private int getRandomDelay() {
-        return getRandomValue(MIN_RANDOM_DELAY, MAX_RANDOM_DELAY);
-    }
-
-    private int getRandomValue(int maxValue, int minValue) {
-        return Integer.valueOf((int) Math.floor(Math.random() * (maxValue - minValue + 1) + minValue));
-    }
-
-    private void hide(final View view, int delay) {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                hide(view);
-            }
-        }, delay);
+    public void onPause() {
+        Log.d("GAME", "The game is paused!");
+        gameStarted = false;
     }
 
     private void setNextGameIteration() {
@@ -107,34 +71,81 @@ public class MainPresenter {
 
     private void runGameIteration() {
         Log.d("GAME", "The game is on!");
-        if (allDevelopersAreHidden()) {
-            rollOneRandomDeveloper();
+        if (allDeveloperLayoutsAreHidden()) {
+            rollOneRandomLayout();
         }
         setNextGameIteration();
     }
 
-    private void rollOneRandomDeveloper() {
-        rollDeveloper(getNextDeveloperToShow());
+    private void rollOneRandomLayout() {
+        ImageView developerLayout = developerLayouts.get(getRandomValue(0, developerLayouts.size() - 1));
+        showRandomDeveloperLayout(developerLayout);
+        hideDeveloperLayoutWithDelay(developerLayout, getRandomDelay());
     }
+    // endregion
 
-    private int getNextDeveloperToShow() {
-        Random random = new Random();
-        int nextDeveloper = random.nextInt(DEVS_COUNT);
-        while (nextDeveloper == lastShownDeveloper) {
-            nextDeveloper = random.nextInt(DEVS_COUNT);
+    // region manager visibility
+    private void showRandomDeveloperLayout(ImageView developerLayout) {
+        if (developerLayout.getVisibility() == View.INVISIBLE) {
+            developerLayout.setImageResource(getRandomDeveloperResource());
+            developerLayout.startAnimation(AnimationUtils.loadAnimation(activity, R.anim.slide_up));
+            developerLayout.setVisibility(View.VISIBLE);
         }
-        return nextDeveloper;
     }
 
-    private boolean allDevelopersAreHidden() {
-        return isInvisible(developer0) && isInvisible(developer1) && isInvisible(developer2);
+    private Integer getRandomDeveloperResource() {
+        Collections.shuffle(developerResources);
+
+        int randomDeveloperResource;
+        if (lastDeveloperResource == 0 || lastDeveloperResource != developerResources.get(0)) {
+            randomDeveloperResource = developerResources.get(0);
+        } else {
+            randomDeveloperResource = developerResources.get(1);
+        }
+
+        lastDeveloperResource = randomDeveloperResource;
+        return randomDeveloperResource;
     }
 
-    private boolean isInvisible(View view) {
-        return view.getVisibility() == View.INVISIBLE;
+    private void hideAllDeveloperLayouts() {
+        for (ImageView developerLayout: developerLayouts) {
+            hideDeveloperLayoutWithDelay(developerLayout, getRandomValue(100, 500));
+        }
     }
 
-    public void onPause() {
-        gameStarted = false;
+    private void hideDeveloperLayoutWithDelay(final ImageView developerLayout, int delay) {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                hideDeveloperLayout(developerLayout);
+            }
+        }, delay);
     }
+
+    private void hideDeveloperLayout(ImageView developerLayout) {
+        if (developerLayout.getVisibility() == View.VISIBLE) {
+            developerLayout.startAnimation(AnimationUtils.loadAnimation(activity, R.anim.slide_down));
+            developerLayout.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    private boolean allDeveloperLayoutsAreHidden() {
+        for (ImageView imageView: developerLayouts) {
+            if (imageView.getVisibility() == View.VISIBLE) {
+                return false;
+            }
+        }
+        return true;
+    }
+    // endregion
+
+    // region random methods
+    private int getRandomDelay() {
+        return getRandomValue(MIN_RANDOM_DELAY, MAX_RANDOM_DELAY);
+    }
+
+    private int getRandomValue(int minValue, int maxValue) {
+        return Integer.valueOf((int) Math.floor(Math.random() * (maxValue - minValue + 1) + minValue));
+    }
+    // endregion
 }
