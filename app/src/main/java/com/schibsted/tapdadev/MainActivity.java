@@ -21,15 +21,20 @@ public class MainActivity extends AppCompatActivity {
         ImageView developer1 = (ImageView) findViewById(R.id.l_developer1).findViewById(R.id.iv_developer);
         ImageView developer2 = (ImageView) findViewById(R.id.l_developer2).findViewById(R.id.iv_developer);
 
-        View.OnClickListener listener = new OnDeveloperClickListener();
-        developer0.setOnClickListener(listener);
-        developer1.setOnClickListener(listener);
-        developer2.setOnClickListener(listener);
-
         handler = new Handler();
 
+        Target.OnTargetTappedListener targetListener = new Target.OnTargetTappedListener() {
+            @Override
+            public void onTargetTapped(Target target) {
+                presenter.onTargetTapped(target);
+            }
+        };
+        Target target0 = new Target(developer0, targetListener);
+        Target target1 = new Target(developer1, targetListener);
+        Target target2 = new Target(developer2, targetListener);
+
         presenter = new MainPresenter(this, handler,
-          new ImageView[]{developer0, developer1, developer2},
+          new Target[]{target0, target1, target2},
           CharacterFactory.withImages(R.drawable.dev_toni, R.drawable.dev_roc, R.drawable.dev_oscar)
         );
     }
@@ -40,33 +45,27 @@ public class MainActivity extends AppCompatActivity {
         presenter.onPause();
     }
 
-    void show(ImageView view, Character character) {
+    void show(Target target, Character character) {
+        ImageView view = target.getImageView();
         view.setImageResource(character.getImageResource());
         view.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_up));
         view.setVisibility(View.VISIBLE);
     }
 
-    void hideDelayed(final View view, int delay) {
+    void hideDelayed(final Target target, int delay) {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                hide(view);
+                hide(target);
             }
         }, delay);
     }
 
-    void hide(View view) {
+    void hide(Target target) {
+        ImageView view = target.getImageView();
         if (view.getVisibility() == View.VISIBLE) {
             view.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_down));
             view.setVisibility(View.INVISIBLE);
-        }
-    }
-
-    public class OnDeveloperClickListener implements View.OnClickListener {
-
-        @Override
-        public void onClick(View view) {
-            presenter.onDeveloperTapped(view);
         }
     }
 }

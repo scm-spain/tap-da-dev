@@ -3,7 +3,6 @@ package com.schibsted.tapdadev;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 
 import java.util.Random;
 
@@ -18,51 +17,51 @@ public class MainPresenter {
     private final MainActivity activity;
     private final Handler handler;
     private final Character[] characters;
-    private final ImageView[] holes;
+    private final Target[] targets;
 
     private boolean gameStarted = false;
     private int lastShownDeveloper = 2;
 
-    public MainPresenter(MainActivity activity, Handler handler, ImageView[] holes, Character[] developers) {
+    public MainPresenter(MainActivity activity, Handler handler, Target[] targets, Character[] developers) {
         this.activity = activity;
         this.handler = handler;
-        this.holes = holes;
+        this.targets = targets;
         this.characters = developers;
         showAll();
     }
 
     private void showAll() {
-        activity.show(holes[0], characters[0]);
-        activity.show(holes[1], characters[1]);
-        activity.show(holes[2], characters[2]);
+        activity.show(targets[0], characters[0]);
+        activity.show(targets[1], characters[1]);
+        activity.show(targets[2], characters[2]);
     }
 
-    public void onDeveloperTapped(View view) {
+    public void onTargetTapped(Target target) {
         if (!gameStarted) {
             gameStarted = true;
             hideThreeDevelopers();
             setNextGameIteration();
         } else {
-            activity.hide(view);
+            activity.hide(target);
         }
     }
 
     private void hideThreeDevelopers() {
-        activity.hideDelayed(holes[0], 180);
-        activity.hide(holes[1]);
-        activity.hideDelayed(holes[2], 400);
+        activity.hideDelayed(targets[0], 180);
+        activity.hide(targets[1]);
+        activity.hideDelayed(targets[2], 400);
     }
 
     private void rollDeveloper(int developer) {
         if (developer == 0) {
-            activity.show(holes[0], characters[0]);
-            activity.hideDelayed(holes[0], getRandomDelay());
+            activity.show(targets[0], characters[0]);
+            activity.hideDelayed(targets[0], getRandomDelay());
         } else if (developer == 1) {
-            activity.show(holes[1], characters[1]);
-            activity.hideDelayed(holes[1], getRandomDelay());
+            activity.show(targets[1], characters[1]);
+            activity.hideDelayed(targets[1], getRandomDelay());
         } else if (developer == 2) {
-            activity.show(holes[2], characters[2]);
-            activity.hideDelayed(holes[2], getRandomDelay());
+            activity.show(targets[2], characters[2]);
+            activity.hideDelayed(targets[2], getRandomDelay());
         }
         lastShownDeveloper = developer;
     }
@@ -108,11 +107,11 @@ public class MainPresenter {
     }
 
     private boolean allDevelopersAreHidden() {
-        return isInvisible(holes[0]) && isInvisible(holes[1]) && isInvisible(holes[2]);
+        return isInvisible(targets[0]) && isInvisible(targets[1]) && isInvisible(targets[2]);
     }
 
-    private boolean isInvisible(View view) {
-        return view.getVisibility() == View.INVISIBLE;
+    private boolean isInvisible(Target target) {
+        return target.getImageView().getVisibility() == View.INVISIBLE;
     }
 
     public void onPause() {
