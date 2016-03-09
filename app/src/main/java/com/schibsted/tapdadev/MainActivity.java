@@ -41,6 +41,12 @@ public class MainActivity extends AppCompatActivity {
         list.add(createDeveloper(R.id.l_developer0));
         list.add(createDeveloper(R.id.l_developer1));
         list.add(createDeveloper(R.id.l_developer2));
+        list.add(createDeveloper(R.id.l_developer3));
+        list.add(createDeveloper(R.id.l_developer4));
+        list.add(createDeveloper(R.id.l_developer5));
+        list.add(createDeveloper(R.id.l_developer6));
+        list.add(createDeveloper(R.id.l_developer7));
+        list.add(createDeveloper(R.id.l_developer8));
 
         return list;
     }

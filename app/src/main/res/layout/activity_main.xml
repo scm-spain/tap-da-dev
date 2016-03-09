@@ -8,7 +8,73 @@
     tools:context="com.schibsted.tapdadev.MainActivity">
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/linearLayout2"
+        android:layout_marginLeft="@dimen/gap_large"
+        android:layout_marginRight="@dimen/gap_large"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <include
+            android:id="@+id/l_developer6"
+            layout="@layout/item_dev"
+            android:layout_width="@dimen/item_width"
+            android:layout_height="@dimen/item_height"
+            android:layout_weight="1"/>
+
+        <include
+            android:id="@+id/l_developer7"
+            layout="@layout/item_dev"
+            android:layout_width="@dimen/item_width"
+            android:layout_height="@dimen/item_height"
+            android:layout_weight="1"/>
+
+        <include
+            android:id="@+id/l_developer8"
+            layout="@layout/item_dev"
+            android:layout_width="@dimen/item_width"
+            android:layout_height="@dimen/item_height"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/linearLayout1"
+        android:layout_marginLeft="@dimen/gap_large"
+        android:layout_marginRight="@dimen/gap_large"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <include
+            android:id="@+id/l_developer3"
+            layout="@layout/item_dev"
+            android:layout_width="@dimen/item_width"
+            android:layout_height="@dimen/item_height"
+            android:layout_weight="1"/>
+
+        <include
+            android:id="@+id/l_developer4"
+            layout="@layout/item_dev"
+            android:layout_width="@dimen/item_width"
+            android:layout_height="@dimen/item_height"
+            android:layout_weight="1"/>
+
+        <include
+            android:id="@+id/l_developer5"
+            layout="@layout/item_dev"
+            android:layout_width="@dimen/item_width"
+            android:layout_height="@dimen/item_height"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -37,6 +103,7 @@
             android:layout_width="@dimen/item_width"
             android:layout_height="@dimen/item_height"
             android:layout_weight="1"/>
+
     </LinearLayout>
 
 </RelativeLayout>

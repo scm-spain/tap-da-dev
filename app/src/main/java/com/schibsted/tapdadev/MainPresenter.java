@@ -78,9 +78,9 @@ public class MainPresenter {
     }
 
     private void rollOneRandomLayout() {
-        ImageView devevloperLayout = developerLayouts.get(getRandomValue(0, developerLayouts.size() - 1));
-        showRandomDeveloperLayout(devevloperLayout);
-        hideDeveloperLayoutWithDelay(devevloperLayout, getRandomDelay());
+        ImageView developerLayout = developerLayouts.get(getRandomValue(0, developerLayouts.size() - 1));
+        showRandomDeveloperLayout(developerLayout);
+        hideDeveloperLayoutWithDelay(developerLayout, getRandomDelay());
     }
     // endregion
 
