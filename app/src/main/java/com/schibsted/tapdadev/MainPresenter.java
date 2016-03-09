@@ -3,8 +3,6 @@ package com.schibsted.tapdadev;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
 
 import java.util.Random;
 
@@ -17,64 +15,55 @@ public class MainPresenter {
     private static final int MAX_RANDOM_DELAY = 1500;
 
     private final MainActivity activity;
-    private final View developer0;
-    private final View developer1;
-    private final View developer2;
+    private final Handler handler;
+    private final Character[] characters;
+    private final Target[] targets;
 
     private boolean gameStarted = false;
     private int lastShownDeveloper = 2;
 
-    public MainPresenter(MainActivity activity, ImageView developer0, ImageView developer1, ImageView developer2) {
+    public MainPresenter(MainActivity activity, Handler handler, Target[] targets, Character[] developers) {
         this.activity = activity;
-        this.developer0 = developer0;
-        this.developer1 = developer1;
-        this.developer2 = developer2;
-
-        developer0.setImageResource(R.drawable.dev_toni);
-        developer1.setImageResource(R.drawable.dev_roc);
-        developer2.setImageResource(R.drawable.dev_oscar);
+        this.handler = handler;
+        this.targets = targets;
+        this.characters = developers;
+        showAll();
     }
 
-    public void onDeveloperTapped(View view) {
+    private void showAll() {
+        activity.show(targets[0], characters[0]);
+        activity.show(targets[1], characters[1]);
+        activity.show(targets[2], characters[2]);
+    }
+
+    public void onTargetTapped(Target target) {
         if (!gameStarted) {
             gameStarted = true;
             hideThreeDevelopers();
             setNextGameIteration();
         } else {
-            hide(view);
+            activity.hide(target);
         }
     }
 
     private void hideThreeDevelopers() {
-        hide(developer0, 180);
-        hide(developer1);
-        hide(developer2, 400);
-    }
-
-    private void hide(View view) {
-        if (view.getVisibility() == View.VISIBLE) {
-            view.startAnimation(AnimationUtils.loadAnimation(activity, R.anim.slide_down));
-            view.setVisibility(View.INVISIBLE);
-        }
+        activity.hideDelayed(targets[0], 180);
+        activity.hide(targets[1]);
+        activity.hideDelayed(targets[2], 400);
     }
 
     private void rollDeveloper(int developer) {
         if (developer == 0) {
-            show(developer0);
-            hide(developer0, getRandomDelay());
+            activity.show(targets[0], characters[0]);
+            activity.hideDelayed(targets[0], getRandomDelay());
         } else if (developer == 1) {
-            show(developer1);
-            hide(developer1, getRandomDelay());
+            activity.show(targets[1], characters[1]);
+            activity.hideDelayed(targets[1], getRandomDelay());
         } else if (developer == 2) {
-            show(developer2);
-            hide(developer2, getRandomDelay());
+            activity.show(targets[2], characters[2]);
+            activity.hideDelayed(targets[2], getRandomDelay());
         }
         lastShownDeveloper = developer;
-    }
-
-    private void show(View view) {
-        view.startAnimation(AnimationUtils.loadAnimation(activity, R.anim.slide_up));
-        view.setVisibility(View.VISIBLE);
     }
 
     private int getRandomDelay() {
@@ -85,17 +74,8 @@ public class MainPresenter {
         return Integer.valueOf((int) Math.floor(Math.random() * (maxValue - minValue + 1) + minValue));
     }
 
-    private void hide(final View view, int delay) {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                hide(view);
-            }
-        }, delay);
-    }
-
     private void setNextGameIteration() {
-        new Handler().postDelayed(new Runnable() {
+        handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 if (gameStarted) {
@@ -127,11 +107,11 @@ public class MainPresenter {
     }
 
     private boolean allDevelopersAreHidden() {
-        return isInvisible(developer0) && isInvisible(developer1) && isInvisible(developer2);
+        return isInvisible(targets[0]) && isInvisible(targets[1]) && isInvisible(targets[2]);
     }
 
-    private boolean isInvisible(View view) {
-        return view.getVisibility() == View.INVISIBLE;
+    private boolean isInvisible(Target target) {
+        return target.getImageView().getVisibility() == View.INVISIBLE;
     }
 
     public void onPause() {
