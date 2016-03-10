@@ -73,7 +73,7 @@ public class MainPresenter {
     }
 
     private void setNextGameIteration() {
-        new Handler().postDelayed(new Runnable() {
+        gameHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 if (gameStarted && !gamePaused) {
