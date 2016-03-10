@@ -2,103 +2,81 @@ package com.schibsted.tapdadev;
 
 import android.os.Handler;
 import android.util.Log;
-import android.view.View;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
-import java.util.Random;
+import java.util.Collections;
+import java.util.List;
 
 public class MainPresenter {
 
     public static final int GAME_ITERATION_DELAY = 50;
-    public static final int DEVS_COUNT = 3;
 
     private static final int MIN_RANDOM_DELAY = 500;
     private static final int MAX_RANDOM_DELAY = 1500;
 
-    private final MainActivity activity;
-    private final View developer0;
-    private final View developer1;
-    private final View developer2;
+    private final PresenterView presenterView;
+
+    private final Handler gameHandler;
+    private final Handler targetHandler;
+
+    private final List<Target> targets;
+    private final List<Character> characters;
+
+    private Target lastTarget;
+    private Character lastCharacter;
 
     private boolean gameStarted = false;
-    private int lastShownDeveloper = 2;
+    private boolean gamePaused = false;
 
-    public MainPresenter(MainActivity activity, ImageView developer0, ImageView developer1, ImageView developer2) {
-        this.activity = activity;
-        this.developer0 = developer0;
-        this.developer1 = developer1;
-        this.developer2 = developer2;
+    public MainPresenter(PresenterView presenterView, List<Target> targets, List<Character> characters) throws Exception {
+        if (targets == null || targets.size() < 3) {
+            throw new Exception("The layouts array must have at least 3 targets");
+        }
 
-        developer0.setImageResource(R.drawable.dev_toni);
-        developer1.setImageResource(R.drawable.dev_roc);
-        developer2.setImageResource(R.drawable.dev_oscar);
+        if (characters == null || characters.size() < 2) {
+            throw new Exception("The resources array must have at least 3 characters");
+        }
+
+        this.presenterView = presenterView;
+        this.gameHandler = new Handler();
+        this.targetHandler = new Handler();
+        this.targets = targets;
+        this.characters = characters;
+
+        showAll();
     }
 
-    public void onDeveloperTapped(View view) {
-        if (!gameStarted) {
-            gameStarted = true;
-            hideThreeDevelopers();
+    // region manager game
+    public void resume() {
+        if (gameStarted == true) {
+            Log.d("GAME", "The game is resumed!");
+            gamePaused = false;
             setNextGameIteration();
-        } else {
-            hide(view);
         }
     }
 
-    private void hideThreeDevelopers() {
-        hide(developer0, 180);
-        hide(developer1);
-        hide(developer2, 400);
+    public void pause() {
+        Log.d("GAME", "The game is paused!");
+        gamePaused = true;
     }
 
-    private void hide(View view) {
-        if (view.getVisibility() == View.VISIBLE) {
-            view.startAnimation(AnimationUtils.loadAnimation(activity, R.anim.slide_down));
-            view.setVisibility(View.INVISIBLE);
+    public void onTargetTapped(Target target) {
+        if (!gameStarted) {
+            Log.d("GAME", "The game is on!");
+
+            gameStarted = true;
+            hideAllDelayed();
+            setNextGameIteration();
+        } else if (!gamePaused) {
+            presenterView.hide(target);
         }
-    }
-
-    private void rollDeveloper(int developer) {
-        if (developer == 0) {
-            show(developer0);
-            hide(developer0, getRandomDelay());
-        } else if (developer == 1) {
-            show(developer1);
-            hide(developer1, getRandomDelay());
-        } else if (developer == 2) {
-            show(developer2);
-            hide(developer2, getRandomDelay());
-        }
-        lastShownDeveloper = developer;
-    }
-
-    private void show(View view) {
-        view.startAnimation(AnimationUtils.loadAnimation(activity, R.anim.slide_up));
-        view.setVisibility(View.VISIBLE);
-    }
-
-    private int getRandomDelay() {
-        return getRandomValue(MIN_RANDOM_DELAY, MAX_RANDOM_DELAY);
-    }
-
-    private int getRandomValue(int maxValue, int minValue) {
-        return Integer.valueOf((int) Math.floor(Math.random() * (maxValue - minValue + 1) + minValue));
-    }
-
-    private void hide(final View view, int delay) {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                hide(view);
-            }
-        }, delay);
     }
 
     private void setNextGameIteration() {
-        new Handler().postDelayed(new Runnable() {
+        gameHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (gameStarted) {
+                if (gameStarted && !gamePaused) {
                     runGameIteration();
                 }
             }
@@ -106,35 +84,81 @@ public class MainPresenter {
     }
 
     private void runGameIteration() {
-        Log.d("GAME", "The game is on!");
-        if (allDevelopersAreHidden()) {
-            rollOneRandomDeveloper();
+        if (allTargetsAreHidden()) {
+            rollOneRandomTarget();
         }
         setNextGameIteration();
     }
 
-    private void rollOneRandomDeveloper() {
-        rollDeveloper(getNextDeveloperToShow());
-    }
+    private void rollOneRandomTarget() {
+        Collections.shuffle(targets);
+        Collections.shuffle(characters);
 
-    private int getNextDeveloperToShow() {
-        Random random = new Random();
-        int nextDeveloper = random.nextInt(DEVS_COUNT);
-        while (nextDeveloper == lastShownDeveloper) {
-            nextDeveloper = random.nextInt(DEVS_COUNT);
+        Target nextTarget = targets.get(0);
+        if (nextTarget.equals(lastTarget)) {
+            nextTarget = targets.get(1);
         }
-        return nextDeveloper;
+        lastTarget = nextTarget;
+
+        Character nextCharacter = characters.get(0);
+        if (nextCharacter.equals(lastCharacter)) {
+            nextCharacter = characters.get(1);
+        }
+        lastCharacter = nextCharacter;
+
+        presenterView.show(nextTarget, nextCharacter);
+        hideDelayed(nextTarget, getRandomDelay());
+    }
+    // endregion
+
+    // region manager visibility
+    private void showAll() {
+        for (int i=0; i < targets.size() && i < characters.size(); i++) {
+            presenterView.show(targets.get(i), characters.get(i));
+        }
     }
 
-    private boolean allDevelopersAreHidden() {
-        return isInvisible(developer0) && isInvisible(developer1) && isInvisible(developer2);
+    private void hideAllDelayed() {
+        for (Target target: targets) {
+            hideDelayed(target, getRandomValue(100, 500));
+        }
     }
 
-    private boolean isInvisible(View view) {
-        return view.getVisibility() == View.INVISIBLE;
+    private void hideDelayed(final Target target, int delay) {
+        targetHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                presenterView.hide(target);
+            }
+        }, delay);
     }
 
-    public void onPause() {
-        gameStarted = false;
+    private boolean allTargetsAreHidden() {
+        for (Target target: targets) {
+            if (ImageView.VISIBLE == target.getImageView().getVisibility()) {
+                return false;
+            }
+        }
+
+        return true;
     }
+    // endregion
+
+    // region random methods
+    private int getRandomDelay() {
+        return getRandomValue(MIN_RANDOM_DELAY, MAX_RANDOM_DELAY);
+    }
+
+    private int getRandomValue(int minValue, int maxValue) {
+        return (int) Math.floor(Math.random() * (maxValue - minValue + 1) + minValue);
+    }
+    // endregion
+
+    // region interface
+    public interface PresenterView {
+        public void show(Target target, Character character);
+
+        public void hide(Target target);
+    }
+    // endregion
 }

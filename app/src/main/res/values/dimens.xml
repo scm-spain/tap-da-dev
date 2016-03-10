@@ -17,7 +17,7 @@
     <!-- Tap da dev -->
     <dimen name="item_width">100dp</dimen>
     <dimen name="item_height">160dp</dimen>
-    <dimen name="item_margin_bottom">40dp</dimen>
+    <dimen name="item_margin_bottom">30dp</dimen>
 
     <dimen name="dev_height">140dp</dimen>
 
