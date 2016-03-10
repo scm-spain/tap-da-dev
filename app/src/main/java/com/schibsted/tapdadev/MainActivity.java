@@ -65,13 +65,17 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Pre
     @Override
     protected void onResume() {
         super.onResume();
-        presenter.resume();
+        if (presenter != null) {
+            presenter.resume();
+        }
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        presenter.pause();
+        if (presenter != null) {
+            presenter.pause();
+        }
     }
 
     public void show(Target target, Character character) {
@@ -80,10 +84,6 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Pre
             view.setImageResource(character.getImageResource());
             view.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_up));
             view.setVisibility(View.VISIBLE);
-
-            String log = target.getId() + " - " + character.getId();
-            view.setTag(log);
-            //Log.i("VISIBLE", log);
         }
     }
 
@@ -92,8 +92,6 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Pre
         if (view.getVisibility() == View.VISIBLE) {
             view.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_down));
             view.setVisibility(View.INVISIBLE);
-
-            //Log.i("INVISIBLE", view.getTag().toString());
         }
     }
 }
