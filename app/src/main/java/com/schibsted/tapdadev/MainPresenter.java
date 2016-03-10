@@ -46,7 +46,7 @@ public class MainPresenter {
         showAll();
     }
 
-    // region manager game
+    // region resume/pause game
     public void resume() {
         if (gameStarted == true) {
             Log.d("GAME", "The game is resumed!");
@@ -59,16 +59,18 @@ public class MainPresenter {
         Log.d("GAME", "The game is paused!");
         gamePaused = true;
     }
+    // endregion
 
+    // region manager game
     public void onTargetTapped(Target target) {
         if (!gameStarted) {
             Log.d("GAME", "The game is on!");
-
             gameStarted = true;
             hideAllDelayed();
             setNextGameIteration();
         } else if (!gamePaused) {
             presenterView.hide(target);
+            targetHandler.removeCallbacksAndMessages(null);
         }
     }
 
@@ -85,20 +87,32 @@ public class MainPresenter {
 
     private void runGameIteration() {
         if (allTargetsAreHidden()) {
-            rollOneRandomTarget();
+            rollOneRandomTargetCharacter();
         }
         setNextGameIteration();
     }
 
-    private void rollOneRandomTarget() {
-        Collections.shuffle(targets);
-        Collections.shuffle(characters);
+    private void rollOneRandomTargetCharacter() {
+        Target nextTarget = getNextRandomTarget();
+        Character nextCharacter = getNextRandomCharacter();
 
+        presenterView.show(nextTarget, nextCharacter);
+        hideDelayed(nextTarget, getRandomDelay());
+    }
+
+    private Target getNextRandomTarget() {
+        Collections.shuffle(targets);
         Target nextTarget = targets.get(0);
         if (nextTarget.equals(lastTarget)) {
             nextTarget = targets.get(1);
         }
         lastTarget = nextTarget;
+
+        return nextTarget;
+    }
+
+    private Character getNextRandomCharacter() {
+        Collections.shuffle(characters);
 
         Character nextCharacter = characters.get(0);
         if (nextCharacter.equals(lastCharacter)) {
@@ -106,8 +120,7 @@ public class MainPresenter {
         }
         lastCharacter = nextCharacter;
 
-        presenterView.show(nextTarget, nextCharacter);
-        hideDelayed(nextTarget, getRandomDelay());
+        return nextCharacter;
     }
     // endregion
 
