@@ -7,7 +7,7 @@
     android:background="@android:color/white"
     tools:context="com.schibsted.tapdadev.MainActivity">
 
-    <LinearLayout
+    <!--LinearLayout
         android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -71,7 +71,7 @@
             android:layout_height="@dimen/item_height"
             android:layout_weight="1"/>
 
-    </LinearLayout>
+    </LinearLayout-->
 
     <LinearLayout
         android:id="@+id/linearLayout1"

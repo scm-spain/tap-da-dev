@@ -22,7 +22,8 @@
         android:layout_marginLeft="@dimen/gap_small"
         android:layout_marginRight="@dimen/gap_small"
         android:adjustViewBounds="true"
-        tools:src="@drawable/dev_toni"/>
+        tools:src="@drawable/dev_toni"
+        android:visibility="invisible"/>
 
     <View
         android:layout_width="@dimen/hole_width"
