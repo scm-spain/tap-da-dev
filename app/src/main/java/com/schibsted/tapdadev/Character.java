@@ -4,10 +4,12 @@ public class Character {
 
     private final int id;
     private final int imageResource;
+    private final int imageResourcePunched;
 
-    public Character(int id, int imageResource) {
+    public Character(int id, int imageResource, int imageResourcePunched) {
         this.id = id;
         this.imageResource = imageResource;
+        this.imageResourcePunched = imageResourcePunched;
     }
 
     public int getId() {
@@ -16,6 +18,10 @@ public class Character {
 
     public int getImageResource() {
         return imageResource;
+    }
+
+    public int getImageResourcePunched() {
+        return imageResourcePunched;
     }
 
     @Override

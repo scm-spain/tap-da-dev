@@ -11,6 +11,8 @@ public class MainPresenter {
 
     public static final int GAME_ITERATION_DELAY = 50;
 
+    public static final int PUNCH_DELAY = 150;
+
     private static final int MIN_RANDOM_DELAY = 500;
     private static final int MAX_RANDOM_DELAY = 1500;
 
@@ -69,8 +71,9 @@ public class MainPresenter {
             hideAllDelayed();
             setNextGameIteration();
         } else if (!gamePaused) {
-            presenterView.hide(target);
             targetHandler.removeCallbacksAndMessages(null);
+            presenterView.punch(target);
+            hideDelayed(target, PUNCH_DELAY);
         }
     }
 
@@ -95,8 +98,9 @@ public class MainPresenter {
     private void rollOneRandomTargetCharacter() {
         Target nextTarget = getNextRandomTarget();
         Character nextCharacter = getNextRandomCharacter();
+        nextTarget.setCharacter(nextCharacter);
 
-        presenterView.show(nextTarget, nextCharacter);
+        presenterView.show(nextTarget);
         hideDelayed(nextTarget, getRandomDelay());
     }
 
@@ -127,13 +131,15 @@ public class MainPresenter {
     // region manager visibility
     private void showAll() {
         for (int i=0; i < targets.size() && i < characters.size(); i++) {
-            presenterView.show(targets.get(i), characters.get(i));
+            Target target = targets.get(i);
+            target.setCharacter(characters.get(i));
+            presenterView.show(target);
         }
     }
 
     private void hideAllDelayed() {
         for (Target target: targets) {
-            hideDelayed(target, getRandomValue(100, 500));
+            hideDelayed(target, getRandomValue(0, 400));
         }
     }
 
@@ -169,9 +175,11 @@ public class MainPresenter {
 
     // region interface
     public interface PresenterView {
-        public void show(Target target, Character character);
+        public void show(Target target);
 
         public void hide(Target target);
+
+        public void punch(Target target);
     }
     // endregion
 }
