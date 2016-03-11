@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/item_width_front"
+    android:layout_height="@dimen/item_height_front"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="@dimen/item_width_front"
+        android:layout_height="@dimen/item_height_front"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true">
+
+        <View
+            android:layout_width="@dimen/hole_width_front"
+            android:layout_height="@dimen/hole_height_front"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/item_margin_bottom_front"
+            android:background="@drawable/hole_back"/>
+
+        <ImageView
+            android:id="@+id/iv_developer"
+            android:layout_width="@dimen/item_width_front"
+            android:layout_height="@dimen/dev_height_front"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="@dimen/gap_small"
+            android:adjustViewBounds="true"
+            tools:src="@drawable/dev_oscar"
+            android:visibility="invisible"/>
+
+        <View
+            android:layout_width="@dimen/hole_width_front"
+            android:layout_height="@dimen/hole_height_front"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/item_margin_bottom_front"
+            android:background="@drawable/hole_front"/>
+
+        <View
+            android:layout_width="@dimen/hole_width_front"
+            android:layout_height="@dimen/item_margin_bottom_front"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="@color/background"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>
