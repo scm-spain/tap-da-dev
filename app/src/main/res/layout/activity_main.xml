@@ -50,23 +50,32 @@
         android:textAllCaps="true"/>
 
     <include
-        android:id="@+id/l_developer1"
-        layout="@layout/item_dev"
+        android:id="@+id/l_developer3"
+        layout="@layout/item_dev_back"
         android:layout_width="@dimen/item_width_back"
         android:layout_height="@dimen/item_height_back"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/margin_bottom_back"/>
+
+    <include
+        android:id="@+id/l_developer2"
+        layout="@layout/item_dev_middle"
+        android:layout_width="@dimen/item_width_middle"
+        android:layout_height="@dimen/item_height_middle"
         android:layout_marginLeft="@dimen/gap_small"
-        android:layout_marginBottom="@dimen/padding_bottom_back"
+        android:layout_marginBottom="@dimen/margin_bottom_middle"
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"/>
 
     <include
-        android:id="@+id/l_developer2"
-        layout="@layout/item_dev"
-        android:layout_width="@dimen/item_width_back"
-        android:layout_height="@dimen/item_height_back"
+        android:id="@+id/l_developer1"
+        layout="@layout/item_dev_middle"
+        android:layout_width="@dimen/item_width_middle"
+        android:layout_height="@dimen/item_height_middle"
         android:layout_marginRight="@dimen/gap_small"
-        android:layout_marginBottom="@dimen/padding_bottom_back"
+        android:layout_marginBottom="@dimen/margin_bottom_middle"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"/>

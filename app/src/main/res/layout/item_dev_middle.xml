@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/item_width_middle"
+    android:layout_height="@dimen/item_height_middle"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="@dimen/item_width_middle"
+        android:layout_height="@dimen/item_height_middle"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true">
+
+        <View
+            android:layout_width="@dimen/hole_width_middle"
+            android:layout_height="@dimen/hole_height_middle"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/item_margin_bottom_middle"
+            android:background="@drawable/hole_back"/>
+
+        <ImageView
+            android:id="@+id/iv_developer"
+            android:layout_width="@dimen/item_width_middle"
+            android:layout_height="@dimen/dev_height_middle"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="@dimen/gap_small"
+            android:adjustViewBounds="true"
+            tools:src="@drawable/dev_toni"
+            android:visibility="invisible"/>
+
+        <View
+            android:layout_width="@dimen/hole_width_middle"
+            android:layout_height="@dimen/hole_height_middle"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/item_margin_bottom_middle"
+            android:background="@drawable/hole_front"/>
+
+        <View
+            android:layout_width="@dimen/hole_width_middle"
+            android:layout_height="@dimen/item_margin_bottom_middle"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="@color/background"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>
