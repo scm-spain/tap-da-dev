@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -81,26 +82,65 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Pre
         }
     }
 
+    @Override
     public void show(Target target) {
         ImageView view = target.getImageView();
         if (view.getVisibility() == View.INVISIBLE) {
             view.setImageResource(target.getCharacter().getImageResource());
-            view.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_up));
+            setRandomUpAnimation(view);
             view.setVisibility(View.VISIBLE);
         }
     }
 
+    private void setRandomUpAnimation(ImageView view) {
+        if (getRandomValue(0, 1) == 0) {
+            view.startAnimation(AnimationUtils.loadAnimation(this, R.anim.overshoot_up));
+        } else {
+            view.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_up));
+        }
+    }
+
+    @Override
     public void punch(Target target) {
         ImageView view = target.getImageView();
-        //view.startAnimation(AnimationUtils.loadAnimation(this, R.anim.punch));
         view.setImageResource(target.getCharacter().getImageResourcePunched());
     }
 
+    @Override
     public void hide(Target target) {
         ImageView view = target.getImageView();
         if (view.getVisibility() == View.VISIBLE) {
-            view.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_down));
+            setRandomDownAnimation(view);
             view.setVisibility(View.INVISIBLE);
         }
+    }
+
+    private void setRandomDownAnimation(ImageView view) {
+        if (getRandomValue(0, 1) == 0) {
+            view.startAnimation(AnimationUtils.loadAnimation(this, R.anim.overshoot_down));
+        } else {
+            view.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_down));
+        }
+    }
+
+    @Override
+    public void updateTime(String time) {
+        TextView textView = (TextView)findViewById(R.id.tv_time_value);
+        textView.setText(time);
+    }
+
+    @Override
+    public void updateScore(String score) {
+        TextView textView = (TextView)findViewById(R.id.tv_score_value);
+        textView.setText(score);
+    }
+
+    @Override
+    public void showFinalScore(String score) {
+        Toast.makeText(this, getString(R.string.final_score, score), Toast.LENGTH_LONG).show();
+    }
+
+    private int getRandomValue(int minValue, int maxValue) {
+        return (int) Math.floor(Math.random() * (maxValue - minValue + 1) + minValue);
     }
 }

@@ -8,20 +8,46 @@
     tools:context="com.schibsted.tapdadev.MainActivity">
 
     <TextView
+        android:id="@+id/tv_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:padding="@dimen/gap_medium"
-        android:text="Time"/>
+        android:text="@string/time"
+        android:textAllCaps="true"/>
 
     <TextView
+        android:id="@+id/tv_time_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/tv_time"
+        android:layout_toEndOf="@+id/tv_time"
+        android:padding="@dimen/gap_medium"
+        android:text="@string/time_value"
+        android:textAllCaps="true"/>
+
+    <TextView
+        android:id="@+id/tv_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/tv_score_value"
+        android:layout_toStartOf="@+id/tv_score_value"
+        android:padding="@dimen/gap_medium"
+        android:text="@string/score"
+        android:textAllCaps="true"/>
+
+    <TextView
+        android:id="@+id/tv_score_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:padding="@dimen/gap_medium"
-        android:text="Points"/>
+        android:text="@string/score_value"
+        android:textAllCaps="true"/>
 
     <include
         android:id="@+id/l_developer1"

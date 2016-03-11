@@ -1,3 +1,4 @@
 <resources>
     <integer name="developer_animation_duration">200</integer>
+    <integer name="developer_animation_overshoot">400</integer>
 </resources>
