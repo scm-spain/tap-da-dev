@@ -1,43 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="@dimen/item_width"
-    android:layout_height="@dimen/item_height"
+    android:layout_width="@dimen/item_width_back"
+    android:layout_height="@dimen/item_height_back"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <View
-        android:layout_width="@dimen/hole_width"
-        android:layout_height="@dimen/hole_height"
-        android:layout_alignParentBottom="true"
+    <RelativeLayout
+        android:layout_width="@dimen/item_width_back"
+        android:layout_height="@dimen/item_height_back"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/item_margin_bottom"
-        android:background="@drawable/hole_back"/>
+        android:layout_centerVertical="true">
 
-    <ImageView
-        android:id="@+id/iv_developer"
-        android:layout_width="@dimen/item_width"
-        android:layout_height="@dimen/dev_height"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="@dimen/gap_small"
-        android:layout_marginRight="@dimen/gap_small"
-        android:adjustViewBounds="true"
-        tools:src="@drawable/dev_toni"
-        android:visibility="invisible"/>
+        <View
+            android:layout_width="@dimen/hole_width"
+            android:layout_height="@dimen/hole_height_back"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/item_margin_bottom_back"
+            android:background="@drawable/hole_back"/>
 
-    <View
-        android:layout_width="@dimen/hole_width"
-        android:layout_height="@dimen/hole_height"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/item_margin_bottom"
-        android:background="@drawable/hole_front"/>
+        <ImageView
+            android:id="@+id/iv_developer"
+            android:layout_width="@dimen/item_width_back"
+            android:layout_height="@dimen/dev_height_back"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="@dimen/gap_small"
+            android:adjustViewBounds="true"
+            tools:src="@drawable/dev_toni"
+            android:visibility="invisible"/>
 
-    <View
-        android:layout_width="@dimen/hole_width"
-        android:layout_height="@dimen/item_margin_bottom"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:background="@android:color/white"/>
+        <View
+            android:layout_width="@dimen/hole_width"
+            android:layout_height="@dimen/hole_height_back"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/item_margin_bottom_back"
+            android:background="@drawable/hole_front"/>
+
+        <View
+            android:layout_width="@dimen/hole_width"
+            android:layout_height="@dimen/item_margin_bottom_back"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="@color/background"/>
+
+    </RelativeLayout>
 
 </RelativeLayout>

@@ -4,106 +4,53 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
+    android:background="@drawable/background"
     tools:context="com.schibsted.tapdadev.MainActivity">
 
-    <!--LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="match_parent"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/linearLayout2"
-        android:layout_marginLeft="@dimen/gap_large"
-        android:layout_marginRight="@dimen/gap_large"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal">
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:padding="@dimen/gap_medium"
+        android:text="Time"/>
 
-        <include
-            android:id="@+id/l_developer6"
-            layout="@layout/item_dev"
-            android:layout_width="@dimen/item_width"
-            android:layout_height="@dimen/item_height"
-            android:layout_weight="1"/>
-
-        <include
-            android:id="@+id/l_developer7"
-            layout="@layout/item_dev"
-            android:layout_width="@dimen/item_width"
-            android:layout_height="@dimen/item_height"
-            android:layout_weight="1"/>
-
-        <include
-            android:id="@+id/l_developer8"
-            layout="@layout/item_dev"
-            android:layout_width="@dimen/item_width"
-            android:layout_height="@dimen/item_height"
-            android:layout_weight="1"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="match_parent"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/linearLayout1"
-        android:layout_marginLeft="@dimen/gap_large"
-        android:layout_marginRight="@dimen/gap_large"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal">
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:padding="@dimen/gap_medium"
+        android:text="Points"/>
 
-        <include
-            android:id="@+id/l_developer3"
-            layout="@layout/item_dev"
-            android:layout_width="@dimen/item_width"
-            android:layout_height="@dimen/item_height"
-            android:layout_weight="1"/>
-
-        <include
-            android:id="@+id/l_developer4"
-            layout="@layout/item_dev"
-            android:layout_width="@dimen/item_width"
-            android:layout_height="@dimen/item_height"
-            android:layout_weight="1"/>
-
-        <include
-            android:id="@+id/l_developer5"
-            layout="@layout/item_dev"
-            android:layout_width="@dimen/item_width"
-            android:layout_height="@dimen/item_height"
-            android:layout_weight="1"/>
-
-    </LinearLayout-->
-
-    <LinearLayout
-        android:id="@+id/linearLayout1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <include
+        android:id="@+id/l_developer1"
+        layout="@layout/item_dev"
+        android:layout_width="@dimen/item_width_back"
+        android:layout_height="@dimen/item_height_back"
+        android:layout_marginLeft="@dimen/gap_medium"
+        android:layout_marginBottom="@dimen/padding_bottom_back"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginLeft="@dimen/gap_large"
-        android:layout_marginRight="@dimen/gap_large"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal">
+        android:layout_centerHorizontal="true"/>
 
-        <include
-            android:id="@+id/l_developer0"
-            layout="@layout/item_dev"
-            android:layout_width="@dimen/item_width"
-            android:layout_height="@dimen/item_height"
-            android:layout_weight="1"/>
+    <include
+        android:id="@+id/l_developer2"
+        layout="@layout/item_dev"
+        android:layout_width="@dimen/item_width_back"
+        android:layout_height="@dimen/item_height_back"
+        android:layout_marginRight="@dimen/gap_medium"
+        android:layout_marginBottom="@dimen/padding_bottom_back"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"/>
 
-        <include
-            android:id="@+id/l_developer1"
-            layout="@layout/item_dev"
-            android:layout_width="@dimen/item_width"
-            android:layout_height="@dimen/item_height"
-            android:layout_weight="1"/>
-
-        <include
-            android:id="@+id/l_developer2"
-            layout="@layout/item_dev"
-            android:layout_width="@dimen/item_width"
-            android:layout_height="@dimen/item_height"
-            android:layout_weight="1"/>
-
-    </LinearLayout>
+    <include
+        android:id="@+id/l_developer0"
+        layout="@layout/item_dev_front"
+        android:layout_width="@dimen/item_width_front"
+        android:layout_height="@dimen/item_height_front"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>
