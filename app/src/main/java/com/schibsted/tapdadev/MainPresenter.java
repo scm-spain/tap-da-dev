@@ -10,7 +10,8 @@ import java.util.List;
 public class MainPresenter {
 
     public static final int GAME_ITERATION_DELAY = 100;
-    public static final int GAME_FINISH_TIME = 1000;
+    public static final int GAME_START_TIME = 1000;
+    public static final int GAME_FINISH_TIME = 0;
 
     public static final int PUNCH_DELAY = 150;
 
@@ -48,6 +49,8 @@ public class MainPresenter {
         this.targetHandler = new Handler();
         this.targets = targets;
         this.characters = characters;
+        this.time = GAME_START_TIME;
+        this.score = 0;
 
         showAll();
     }
@@ -113,7 +116,7 @@ public class MainPresenter {
         hideAll();
 
         presenterView.showFinalScore(Integer.toString(score));
-        time = -1;
+        time = GAME_START_TIME + 1;
         score = -1;
         updateTime();
         updateScore();
@@ -121,7 +124,7 @@ public class MainPresenter {
     }
 
     private void updateTime() {
-        time++;
+        time--;
         presenterView.updateTime(Integer.toString(time / 10) + "." + Integer.toString(time % 10));
     }
 
@@ -140,8 +143,7 @@ public class MainPresenter {
     }
 
     private Target getNextRandomTarget() {
-        Collections.shuffle(targets);
-        Target nextTarget = targets.get(0);
+        Target nextTarget = targets.get(getRandomValue(0, targets.size() - 1));
         if (nextTarget.equals(lastTarget)) {
             nextTarget = targets.get(1);
         }

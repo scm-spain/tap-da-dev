@@ -6,6 +6,6 @@
     <string name="score">Score:</string>
     <string name="score_value">0</string>
     <string name="time">Time:</string>
-    <string name="time_value">0.0</string>
+    <string name="time_value">100.0</string>
 
 </resources>
