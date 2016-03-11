@@ -25,8 +25,9 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Pre
         try {
             presenter = new MainPresenter(this, getTargets(), getCharacters());
         } catch (Exception e) {
+            presenter = null;
             Log.e("GAME", e.getMessage());
-            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG);
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
 
@@ -34,7 +35,9 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Pre
         Target.OnTargetTappedListener targetListener = new Target.OnTargetTappedListener() {
             @Override
             public void onTargetTapped(Target target) {
-                presenter.onTargetTapped(target);
+                if (presenter != null) {
+                    presenter.onTargetTapped(target);
+                }
             }
         };
 
@@ -43,14 +46,7 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Pre
         list.add(new Target(i++, findImageViewById(R.id.l_developer0), targetListener));
         list.add(new Target(i++, findImageViewById(R.id.l_developer1), targetListener));
         list.add(new Target(i++, findImageViewById(R.id.l_developer2), targetListener));
-        /*
-        list.add(new Target(i++, findImageViewById(R.id.l_developer3), targetListener));
-        list.add(new Target(i++, findImageViewById(R.id.l_developer4), targetListener));
-        list.add(new Target(i++, findImageViewById(R.id.l_developer5), targetListener));
-        list.add(new Target(i++, findImageViewById(R.id.l_developer6), targetListener));
-        list.add(new Target(i++, findImageViewById(R.id.l_developer7), targetListener));
-        list.add(new Target(i++, findImageViewById(R.id.l_developer8), targetListener));
-        */
+
         return list;
     }
 
@@ -59,7 +55,14 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Pre
     }
 
     private List<Character> getCharacters() {
-        return CharacterFactory.withImages(R.drawable.dev_toni, R.drawable.dev_roc, R.drawable.dev_oscar);
+        return CharacterFactory.withImages(
+                R.drawable.dev_toni,
+                R.drawable.dev_toni_punched,
+                R.drawable.dev_roc,
+                R.drawable.dev_roc_punched,
+                R.drawable.dev_oscar,
+                R.drawable.dev_oscar_punched
+        );
     }
 
     @Override
@@ -78,13 +81,19 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Pre
         }
     }
 
-    public void show(Target target, Character character) {
+    public void show(Target target) {
         ImageView view = target.getImageView();
         if (view.getVisibility() == View.INVISIBLE) {
-            view.setImageResource(character.getImageResource());
+            view.setImageResource(target.getCharacter().getImageResource());
             view.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_up));
             view.setVisibility(View.VISIBLE);
         }
+    }
+
+    public void punch(Target target) {
+        ImageView view = target.getImageView();
+        //view.startAnimation(AnimationUtils.loadAnimation(this, R.anim.punch));
+        view.setImageResource(target.getCharacter().getImageResourcePunched());
     }
 
     public void hide(Target target) {

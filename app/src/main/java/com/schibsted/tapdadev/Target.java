@@ -8,6 +8,8 @@ public class Target {
     private final int id;
     private final ImageView imageView;
 
+    private Character character;
+
     public Target(int id, ImageView imageView, final OnTargetTappedListener listener) {
         this.id = id;
         this.imageView = imageView;
@@ -25,6 +27,14 @@ public class Target {
 
     public ImageView getImageView() {
         return imageView;
+    }
+
+    public Character getCharacter() {
+        return character;
+    }
+
+    public void setCharacter(Character character) {
+        this.character = character;
     }
 
     public interface OnTargetTappedListener {
