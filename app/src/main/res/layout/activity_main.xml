@@ -28,7 +28,7 @@
         layout="@layout/item_dev"
         android:layout_width="@dimen/item_width_back"
         android:layout_height="@dimen/item_height_back"
-        android:layout_marginLeft="@dimen/gap_medium"
+        android:layout_marginLeft="@dimen/gap_small"
         android:layout_marginBottom="@dimen/padding_bottom_back"
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
@@ -39,7 +39,7 @@
         layout="@layout/item_dev"
         android:layout_width="@dimen/item_width_back"
         android:layout_height="@dimen/item_height_back"
-        android:layout_marginRight="@dimen/gap_medium"
+        android:layout_marginRight="@dimen/gap_small"
         android:layout_marginBottom="@dimen/padding_bottom_back"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
@@ -51,6 +51,7 @@
         android:layout_width="@dimen/item_width_front"
         android:layout_height="@dimen/item_height_front"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/margin_bottom_front"/>
 
 </RelativeLayout>
