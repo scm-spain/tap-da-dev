@@ -9,7 +9,8 @@ import java.util.List;
 
 public class MainPresenter {
 
-    public static final int GAME_ITERATION_DELAY = 50;
+    public static final int GAME_ITERATION_DELAY = 100;
+    public static final int GAME_FINISH_TIME = 1000;
 
     public static final int PUNCH_DELAY = 150;
 
@@ -26,6 +27,9 @@ public class MainPresenter {
 
     private Target lastTarget;
     private Character lastCharacter;
+
+    private int time;
+    private int score;
 
     private boolean gameStarted = false;
     private boolean gamePaused = false;
@@ -70,9 +74,11 @@ public class MainPresenter {
             gameStarted = true;
             hideAllDelayed();
             setNextGameIteration();
-        } else if (!gamePaused) {
+        } else if (!gamePaused && !target.isPunched()) {
             targetHandler.removeCallbacksAndMessages(null);
             presenterView.punch(target);
+            target.setPunched(!target.isPunched());
+            updateScore();
             hideDelayed(target, PUNCH_DELAY);
         }
     }
@@ -89,10 +95,39 @@ public class MainPresenter {
     }
 
     private void runGameIteration() {
+        updateTime();
+        if (time == GAME_FINISH_TIME) {
+            finishGame();
+        }
         if (allTargetsAreHidden()) {
             rollOneRandomTargetCharacter();
         }
         setNextGameIteration();
+    }
+
+    private void finishGame() {
+        targetHandler.removeCallbacksAndMessages(null);
+        gameHandler.removeCallbacksAndMessages(null);
+        gameStarted = false;
+        gamePaused = false;
+        hideAll();
+
+        presenterView.showFinalScore(Integer.toString(score));
+        time = -1;
+        score = -1;
+        updateTime();
+        updateScore();
+        showAll();
+    }
+
+    private void updateTime() {
+        time++;
+        presenterView.updateTime(Integer.toString(time / 10) + "." + Integer.toString(time % 10));
+    }
+
+    private void updateScore() {
+        score++;
+        presenterView.updateScore(Integer.toString(score));
     }
 
     private void rollOneRandomTargetCharacter() {
@@ -111,6 +146,7 @@ public class MainPresenter {
             nextTarget = targets.get(1);
         }
         lastTarget = nextTarget;
+        nextTarget.setPunched(false);
 
         return nextTarget;
     }
@@ -133,7 +169,14 @@ public class MainPresenter {
         for (int i=0; i < targets.size() && i < characters.size(); i++) {
             Target target = targets.get(i);
             target.setCharacter(characters.get(i));
+            target.setPunched(false);
             presenterView.show(target);
+        }
+    }
+
+    private void hideAll() {
+        for (Target target: targets) {
+            presenterView.hide(target);
         }
     }
 
@@ -180,6 +223,12 @@ public class MainPresenter {
         public void hide(Target target);
 
         public void punch(Target target);
+
+        public void updateTime(String time);
+
+        public void updateScore(String score);
+
+        public void showFinalScore(String score);
     }
     // endregion
 }

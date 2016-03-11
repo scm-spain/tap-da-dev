@@ -9,6 +9,7 @@ public class Target {
     private final ImageView imageView;
 
     private Character character;
+    private boolean punched;
 
     public Target(int id, ImageView imageView, final OnTargetTappedListener listener) {
         this.id = id;
@@ -35,6 +36,14 @@ public class Target {
 
     public void setCharacter(Character character) {
         this.character = character;
+    }
+
+    public boolean isPunched() {
+        return punched;
+    }
+
+    public void setPunched(boolean punched) {
+        this.punched = punched;
     }
 
     public interface OnTargetTappedListener {

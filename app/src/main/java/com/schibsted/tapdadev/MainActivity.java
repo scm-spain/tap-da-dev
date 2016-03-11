@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -102,5 +103,20 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Pre
             view.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_down));
             view.setVisibility(View.INVISIBLE);
         }
+    }
+
+    public void updateTime(String time) {
+        TextView textView = (TextView)findViewById(R.id.tv_time_value);
+        textView.setText(time);
+    }
+
+    public void updateScore(String score) {
+        TextView textView = (TextView)findViewById(R.id.tv_score_value);
+        textView.setText(score);
+    }
+
+    @Override
+    public void showFinalScore(String score) {
+        Toast.makeText(this, getString(R.string.final_score, score), Toast.LENGTH_LONG).show();
     }
 }

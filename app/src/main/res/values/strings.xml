@@ -1,3 +1,11 @@
 <resources>
+
     <string name="app_name">Tap da dev</string>
+    <string name="congratulations_new_record">Congratulations new record done!!!</string>
+    <string name="final_score">Your final score is %1$s</string>
+    <string name="score">Score:</string>
+    <string name="score_value">0</string>
+    <string name="time">Time:</string>
+    <string name="time_value">0.0</string>
+
 </resources>
