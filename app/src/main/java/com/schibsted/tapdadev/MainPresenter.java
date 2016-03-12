@@ -57,7 +57,7 @@ public class MainPresenter {
 
     // region resume/pause game
     public void resume() {
-        if (gameStarted == true) {
+        if (gameStarted) {
             Log.d("GAME", "The game is resumed!");
             gamePaused = false;
             setNextGameIteration();
