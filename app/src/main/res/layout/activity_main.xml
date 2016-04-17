@@ -15,6 +15,7 @@
         android:layout_alignParentLeft="true"
         android:padding="@dimen/gap_medium"
         android:text="@string/time"
+        android:textStyle="bold"
         android:textAllCaps="true"/>
 
     <TextView
@@ -26,6 +27,7 @@
         android:layout_toEndOf="@+id/tv_time"
         android:padding="@dimen/gap_medium"
         android:text="@string/time_value"
+        android:textStyle="bold"
         android:textAllCaps="true"/>
 
     <TextView
@@ -37,6 +39,7 @@
         android:layout_toStartOf="@+id/tv_score_value"
         android:padding="@dimen/gap_medium"
         android:text="@string/score"
+        android:textStyle="bold"
         android:textAllCaps="true"/>
 
     <TextView
@@ -47,6 +50,7 @@
         android:layout_alignParentRight="true"
         android:padding="@dimen/gap_medium"
         android:text="@string/score_value"
+        android:textStyle="bold"
         android:textAllCaps="true"/>
 
     <include

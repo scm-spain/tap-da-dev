@@ -60,6 +60,8 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Pre
                 R.drawable.dev_toni_punched,
                 R.drawable.dev_roc,
                 R.drawable.dev_roc_punched,
+                R.drawable.dev_jose,
+                R.drawable.dev_jose_punched,
                 R.drawable.dev_oscar,
                 R.drawable.dev_oscar_punched
         );

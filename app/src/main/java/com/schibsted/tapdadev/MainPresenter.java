@@ -10,7 +10,7 @@ import java.util.List;
 public class MainPresenter {
 
     public static final int GAME_ITERATION_DELAY = 100;
-    public static final int GAME_START_TIME = 1000;
+    public static final int GAME_START_TIME = 300;
     public static final int GAME_FINISH_TIME = 0;
 
     public static final int PUNCH_DELAY = 150;
