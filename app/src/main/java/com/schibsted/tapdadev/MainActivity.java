@@ -1,7 +1,6 @@
 package com.schibsted.tapdadev;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -16,7 +15,6 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements MainPresenter.PresenterView {
 
     private MainPresenter presenter;
-    private Handler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Pre
         list.add(new Target(i++, findImageViewById(R.id.l_developer0), targetListener));
         list.add(new Target(i++, findImageViewById(R.id.l_developer1), targetListener));
         list.add(new Target(i++, findImageViewById(R.id.l_developer2), targetListener));
+        list.add(new Target(i++, findImageViewById(R.id.l_developer3), targetListener));
 
         return list;
     }
@@ -61,6 +60,8 @@ public class MainActivity extends AppCompatActivity implements MainPresenter.Pre
                 R.drawable.dev_toni_punched,
                 R.drawable.dev_roc,
                 R.drawable.dev_roc_punched,
+                R.drawable.dev_jose,
+                R.drawable.dev_jose_punched,
                 R.drawable.dev_oscar,
                 R.drawable.dev_oscar_punched
         );

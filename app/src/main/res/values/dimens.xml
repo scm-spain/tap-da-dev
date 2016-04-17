@@ -15,31 +15,32 @@
     <dimen name="text_size_large">22sp</dimen>
 
     <!-- Tap da dev -->
-    <dimen name="padding_bottom_back">75dp</dimen>
-    <dimen name="margin_bottom_front">-30dp</dimen>
+    <dimen name="margin_bottom_back">130dp</dimen>
+    <dimen name="margin_bottom_middle">65dp</dimen>
+    <dimen name="margin_bottom_front">-35dp</dimen>
 
-    <dimen name="item_width_base">100dp</dimen>
-    <dimen name="item_width_back">150dp</dimen>
+    <dimen name="item_width_back">100dp</dimen>
+    <dimen name="item_width_middle">150dp</dimen>
     <dimen name="item_width_front">220dp</dimen>
 
-    <dimen name="item_height_base">160dp</dimen>
-    <dimen name="item_height_back">240dp</dimen>
+    <dimen name="item_height_back">160dp</dimen>
+    <dimen name="item_height_middle">240dp</dimen>
     <dimen name="item_height_front">352dp</dimen>
 
-    <dimen name="item_margin_bottom_base">30dp</dimen>
-    <dimen name="item_margin_bottom_back">45dp</dimen>
+    <dimen name="item_margin_bottom_back">30dp</dimen>
+    <dimen name="item_margin_bottom_middle">45dp</dimen>
     <dimen name="item_margin_bottom_front">66dp</dimen>
 
-    <dimen name="dev_height_base">140dp</dimen>
-    <dimen name="dev_height_back">210dp</dimen>
+    <dimen name="dev_height_back">140dp</dimen>
+    <dimen name="dev_height_middle">210dp</dimen>
     <dimen name="dev_height_front">308dp</dimen>
 
-    <dimen name="hole_width_base">100dp</dimen>
-    <dimen name="hole_width">150dp</dimen>
+    <dimen name="hole_width_back">100dp</dimen>
+    <dimen name="hole_width_middle">150dp</dimen>
     <dimen name="hole_width_front">220dp</dimen>
 
-    <dimen name="hole_height_base">30dp</dimen>
-    <dimen name="hole_height_back">45dp</dimen>
+    <dimen name="hole_height_back">30dp</dimen>
+    <dimen name="hole_height_middle">45dp</dimen>
     <dimen name="hole_height_front">66dp</dimen>
 
 </resources>
